@@ -12,7 +12,7 @@ module mm
 
 	# ODE system
 	myODE = @ode_def begin
-		dX  = (mX * Z) - (gX * X)
+		dX  = mX - (gX * X)
 		dY  = (mY * X) - (gY * Y)
 		dZ  = (mZ * Y) - (gZ * Z)
 	end mX gX mY gY mZ gZ;

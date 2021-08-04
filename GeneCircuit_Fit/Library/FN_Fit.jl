@@ -70,6 +70,10 @@ module fn
 	#        D - Vector of data values (i.e. steady state measurements)
 	# OUPUT:   - Mean Squared Error
 	function MSE(Y,D)
-		return (sum((log10.(D) - log10.(Y)).^2)/std(log10.(D)))/length(Y);
+		yy = copy(Y);
+		yy[yy.==0].=1e-18;
+		dd = copy(D);
+		dd[dd.==0].=1e-18;
+		return (sum((log10.(dd) - log10.(yy)).^2)/std(log10.(dd)))/length(yy);
 	end;
 end
