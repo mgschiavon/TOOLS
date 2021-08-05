@@ -27,5 +27,5 @@ module mm
 		dE   = (bE * Em) - (gE * E)
 		dRm  = - (gHs * Rm) + ((bHo * min(I,Hu)) + (bHs * min(Ia,Hu)))
 		dRs  = (0.008333 * Rm) - (0.00003472 * Rs)
-	end sU cB cBI gUB cD cE gB gF mI gI cA gIB gIA kI nI bHu gHs bHs bHo bBm nB a0 a1 gBm bB gB bEm nE gEm bE gE uT;
+	end sU cB cBI gUB cD cE gB gF mI gI cA gIB gIA kI nI bHu gHs bHs bHo bBm nB a0 a1 gBm bB gB bEm nE gEm bE gE;
 end

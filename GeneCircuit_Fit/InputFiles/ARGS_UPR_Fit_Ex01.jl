@@ -35,8 +35,8 @@ function mySIM(fn,mm,p,d)
 	Y = zeros(size(d.Xe));
 	pWT = copy(p);
 	# Calculate dynamics -- WT (Fig. 3A, Pincus et al.):
-	for dtt in d.DTT
-		p[:cD] = dtt * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
+	for dtt in 1:length(d.DTT)
+		p[:cD] = d.DTT[dtt] * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
 		xS = fn.Dyn(mm.myODE, p, x0, 300.0, 1e-6);
 		for i in 1:length(d.tD)
 			Y[dtt,i] = xS(d.tD[i]);
@@ -46,8 +46,8 @@ function mySIM(fn,mm,p,d)
 	p = copy(pWT);
 	p[:nB] = 0;
 	p[:nE] = 0;
-	for dtt in d.DTT
-		p[:cD] = dtt * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
+	for dtt in 1:length(d.DTT)
+		p[:cD] = d.DTT[dtt] * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
 		xS = fn.Dyn(mm.myODE, p, x0, 300.0, 1e-6);
 		for i in 1:length(d.tD)
 			Y[dtt+length(d.DTT),i] = xS(d.tD[i]);
@@ -57,8 +57,8 @@ function mySIM(fn,mm,p,d)
 	p = copy(pWT);
 	p[:cBI] = 0;
 	p[:gIB] = 0;
-	for dtt in d.DTT
-		p[:cD] = dtt * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
+	for dtt in 1:length(d.DTT)
+		p[:cD] = d.DTT[dtt] * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
 		xS = fn.Dyn(mm.myODE, p, x0, 300.0, 1e-6);
 		for i in 1:length(d.tD)
 			Y[dtt+(2*length(d.DTT)),i] = xS(d.tD[i]);
