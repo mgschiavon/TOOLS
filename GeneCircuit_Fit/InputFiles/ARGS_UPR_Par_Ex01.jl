@@ -43,7 +43,7 @@ p = Dict([
 ]);
 
 # Initial conditions:
-x0 = zeros(length(mm.odeFB.syms));
+x0 = zeros(length(mm.myODE.syms));
 x0[1] = 0;                  # :U, unfolded proteins
 x0[2] = 1000;               # :UB, unfolded proteins:BiP complex
 x0[5] = 256;                # :I, Ire1
