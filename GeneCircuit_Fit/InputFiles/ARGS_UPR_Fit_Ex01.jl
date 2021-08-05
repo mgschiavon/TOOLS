@@ -44,6 +44,7 @@ function mySIM(fn,mm,p,d)
 			Y[dtt,i] = xS(d.tD[i])[15];
 		end
 	end
+	Y[1:length(d.DTT),1:length(d.tD)] = 100 .* (Y[1:length(d.DTT),1:length(d.tD)] .- minimum(Y[1:length(d.DTT),1:length(d.tD)]))./(maximum(Y[1:length(d.DTT),1:length(d.tD)]) - minimum(Y[1:length(d.DTT),1:length(d.tD)]));
 	# Calculate dynamics -- hac1 mutant (Fig. 3B, Pincus et al.):
 	p = copy(pWT);
 	p[:nB] = 0;
@@ -57,6 +58,7 @@ function mySIM(fn,mm,p,d)
 			Y[dtt+length(d.DTT),i] = xS(d.tD[i])[15];
 		end
 	end
+	Y[(1+length(d.DTT)):(2*length(d.DTT)),1:length(d.tD)] = 100 .* (Y[(1+length(d.DTT)):(2*length(d.DTT)),1:length(d.tD)] .- minimum(Y[(1+length(d.DTT)):(2*length(d.DTT)),1:length(d.tD)]))./(maximum(Y[(1+length(d.DTT)):(2*length(d.DTT)),1:length(d.tD)]) - minimum(Y[(1+length(d.DTT)):(2*length(d.DTT)),1:length(d.tD)]));
 	# Calculate dynamics -- Ire1-bipless (Fig. 3C, Pincus et al.):
 	p = copy(pWT);
 	p[:cBI] = 0;
@@ -70,6 +72,7 @@ function mySIM(fn,mm,p,d)
 			Y[dtt+(2*length(d.DTT)),i] = xS(d.tD[i])[15];
 		end
 	end
+	Y[(1+(2*length(d.DTT))):(3*length(d.DTT)),1:length(d.tD)] = 100 .* (Y[(1+(2*length(d.DTT))):(3*length(d.DTT)),1:length(d.tD)] .- minimum(Y[(1+(2*length(d.DTT))):(3*length(d.DTT)),1:length(d.tD)]))./(maximum(Y[(1+(2*length(d.DTT))):(3*length(d.DTT)),1:length(d.tD)]) - minimum(Y[(1+(2*length(d.DTT))):(3*length(d.DTT)),1:length(d.tD)]));
 	p = copy(pWT);
 	return Y;
 end
