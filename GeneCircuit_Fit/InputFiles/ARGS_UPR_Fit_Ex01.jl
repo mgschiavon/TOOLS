@@ -11,7 +11,7 @@ mrw  = (pOp  = [:gF,:cB,:gUB,:cBI],# Parameters to optimize
 		pMax = [-1,0,4,0],# Maximum parameter value to explore (log10)
 		runs = 4,# Number of optimization runs
 		iter = 100000,# Number of iterations per optimization run
-		cov  = [0.1,0.1,0.1],# Covariance to calculate parameter random walk
+		cov  = [0.1,0.1,0.1,0.1],# Covariance to calculate parameter random walk
 		M    = 2,	# "Mutation step size" for multiplicative random walk
 		rnP0 = 0,	# Flag for random initial values of parameters to optimize
 		temp = 0,	# Flag for simulated annealing (if 0, MRW)
