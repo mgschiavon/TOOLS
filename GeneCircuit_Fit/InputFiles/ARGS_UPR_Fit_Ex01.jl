@@ -39,7 +39,7 @@ function mySIM(fn,mm,p,d)
 		p[:cD] = d.DTT[dtt] * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
 		xS = fn.Dyn(mm.myODE, p, x0, 300.0, 1e-6);
 		for i in 1:length(d.tD)
-			Y[dtt,i] = xS(d.tD[i]);
+			Y[dtt,i] = xS(d.tD[i])[15];
 		end
 	end
 	# Calculate dynamics -- hac1 mutant (Fig. 3B, Pincus et al.):
@@ -50,7 +50,7 @@ function mySIM(fn,mm,p,d)
 		p[:cD] = d.DTT[dtt] * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
 		xS = fn.Dyn(mm.myODE, p, x0, 300.0, 1e-6);
 		for i in 1:length(d.tD)
-			Y[dtt+length(d.DTT),i] = xS(d.tD[i]);
+			Y[dtt+length(d.DTT),i] = xS(d.tD[i])[15];
 		end
 	end
 	# Calculate dynamics -- Ire1-bipless (Fig. 3C, Pincus et al.):
@@ -61,7 +61,7 @@ function mySIM(fn,mm,p,d)
 		p[:cD] = d.DTT[dtt] * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
 		xS = fn.Dyn(mm.myODE, p, x0, 300.0, 1e-6);
 		for i in 1:length(d.tD)
-			Y[dtt+(2*length(d.DTT)),i] = xS(d.tD[i]);
+			Y[dtt+(2*length(d.DTT)),i] = xS(d.tD[i])[15];
 		end
 	end
 	p = copy(pWT);
