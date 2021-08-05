@@ -7,11 +7,11 @@
 
 # Kinetic parameters
 p = Dict([
-	:mX => 1.0,       # X synthesis rate (1/min)
+	:mX => 5.8,       # X synthesis rate (1/min)
 	:gX => 0.01,      # X degradation rate (1/min)
-	:mY => 0.2,       # Y synthesis rate (1/min)
+	:mY => 2.1,       # Y synthesis rate (1/min)
 	:gY => 0.01,      # Y degradation rate (1/min)
-	:mZ => 0.15,      # Z synthesis rate (1/min)
+	:mZ => 0.05,      # Z synthesis rate (1/min)
 	:gZ => 0.01,      # Z degradation rate (1/min)
 ]);
 

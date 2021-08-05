@@ -7,11 +7,11 @@
 
 # Fitting parameters
 mrw  = (pOp  = [:mX,:mY,:mZ],# Parameters to optimize
-		pMin = [-3,-3,-3],# Minimum parameter value to explore (log10)
-		pMax = [1,1,1],# Maximum parameter value to explore (log10)
+		pMin = [-2,-2,-2],# Minimum parameter value to explore (log10)
+		pMax = [2,2,2],# Maximum parameter value to explore (log10)
 		runs = 4,# Number of optimization runs
-		iter = 20000,# Number of iterations per optimization run
-		cov  = [0.1,0.1,0.1],# Covariance to calculate parameter random walk
+		iter = 100000,# Number of iterations per optimization run
+		cov  = [0.01,0.01,0.01],# Covariance to calculate parameter random walk
 		M    = 2,	# "Mutation step size" for multiplicative random walk
 		rnP0 = 0,	# Flag for random initial values of parameters to optimize
 		temp = 0,	# Flag for simulated annealing (if 0, MRW)
