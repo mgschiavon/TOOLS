@@ -39,9 +39,9 @@ function mySIM(fn,mm,p,d)
 	x0d = fn.SS(mm.myODE, p, x0, 1e-6);
 	for dtt in 1:length(d.DTT)
 		p[:cD] = d.DTT[dtt] * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
-		xS = fn.Dyn(mm.myODE, p, x0d, 300.0, 1e-6);
+		xS = fn.Dyn(mm.myODE, p, x0d, 18000.0, 1e-6);
 		for i in 1:length(d.tD)
-			Y[dtt,i] = xS(d.tD[i])[15];
+			Y[dtt,i] = xS(d.tD[i]*60)[15];
 		end
 	end
 	Y[1:length(d.DTT),1:length(d.tD)] = 100 .* (Y[1:length(d.DTT),1:length(d.tD)] .- minimum(Y[1:length(d.DTT),1:length(d.tD)]))./(maximum(Y[1:length(d.DTT),1:length(d.tD)]) - minimum(Y[1:length(d.DTT),1:length(d.tD)]));
@@ -53,9 +53,9 @@ function mySIM(fn,mm,p,d)
 	x0d = fn.SS(mm.myODE, p, x0, 1e-6);
 	for dtt in 1:length(d.DTT)
 		p[:cD] = d.DTT[dtt] * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
-		xS = fn.Dyn(mm.myODE, p, x0d, 300.0, 1e-6);
+		xS = fn.Dyn(mm.myODE, p, x0d, 18000.0, 1e-6);
 		for i in 1:length(d.tD)
-			Y[dtt+length(d.DTT),i] = xS(d.tD[i])[15];
+			Y[dtt+length(d.DTT),i] = xS(d.tD[i]*60)[15];
 		end
 	end
 	Y[(1+length(d.DTT)):(2*length(d.DTT)),1:length(d.tD)] = 100 .* (Y[(1+length(d.DTT)):(2*length(d.DTT)),1:length(d.tD)] .- minimum(Y[(1+length(d.DTT)):(2*length(d.DTT)),1:length(d.tD)]))./(maximum(Y[(1+length(d.DTT)):(2*length(d.DTT)),1:length(d.tD)]) - minimum(Y[(1+length(d.DTT)):(2*length(d.DTT)),1:length(d.tD)]));
@@ -67,9 +67,9 @@ function mySIM(fn,mm,p,d)
 	x0d = fn.SS(mm.myODE, p, x0, 1e-6);
 	for dtt in 1:length(d.DTT)
 		p[:cD] = d.DTT[dtt] * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
-		xS = fn.Dyn(mm.myODE, p, x0d, 300.0, 1e-6);
+		xS = fn.Dyn(mm.myODE, p, x0d, 18000.0, 1e-6);
 		for i in 1:length(d.tD)
-			Y[dtt+(2*length(d.DTT)),i] = xS(d.tD[i])[15];
+			Y[dtt+(2*length(d.DTT)),i] = xS(d.tD[i]*60)[15];
 		end
 	end
 	Y[(1+(2*length(d.DTT))):(3*length(d.DTT)),1:length(d.tD)] = 100 .* (Y[(1+(2*length(d.DTT))):(3*length(d.DTT)),1:length(d.tD)] .- minimum(Y[(1+(2*length(d.DTT))):(3*length(d.DTT)),1:length(d.tD)]))./(maximum(Y[(1+(2*length(d.DTT))):(3*length(d.DTT)),1:length(d.tD)]) - minimum(Y[(1+(2*length(d.DTT))):(3*length(d.DTT)),1:length(d.tD)]));
