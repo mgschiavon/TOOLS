@@ -1,6 +1,5 @@
 cd("C:\\Users\\mgsch\\Dropbox (Personal)\\LIIGH\\TOOLS\\GeneCircuit_Fit\\")
 using Pkg; Pkg.activate(".");
-using Plots
 iARG = (mm = "UPR",	# Label for model file
         ex = "Ex02");	# Label for parameters file
 
@@ -30,7 +29,7 @@ d = (tD  = x[1,2:end],						# Time points (min)
 	 DTT = parse.(Float64, x[2:8,1]),		# DTT concetration (mM)
 	 Xe  = x[vcat(2:8,10:16,18:24),2:end]);	# Data points
 
-## Simulate & plot dynamics for the specific parameters:
+##
 pOp  = [:gF,:cB,:gUB,:cBI];
 vOp  = [0.00595,0.06733,6658.35,0.13356];
 for i in 1:length(pOp)
@@ -42,9 +41,5 @@ plot([0,1000],[x0d[15],x0d[15]],label=string("DTT = 0 mM"),lw=3,legend=:topleft)
 for dtt in 2:length(d.DTT)
         p[:cD] = d.DTT[dtt] * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
         xS = fn.Dyn(mm.myODE, p, x0d, 1000.0, 1e-6);
-		xR = zeros(length(d.tD));
-		for t in 1:length(d.tD)
-			xR[t] = xS(d.tD[t])[15];
-		end
-        plot!(d.tD,xR,label=string("DTT = ",d.DTT[dtt]," mM"),lw=3,legend=:topleft)
+        plot!(xS.t,[x0d[15],x0d[15]],label=string("DTT = ",d.DTT[dtt]," mM"),lw=3,legend=:topleft)
 end
