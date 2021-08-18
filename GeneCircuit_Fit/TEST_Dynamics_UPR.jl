@@ -14,32 +14,32 @@ fn = include(string("Library\\FN_Fit.jl"));			# Functions
 # iARG = (mm : Label for motif file, ex : Label for parameters file);
 # System parameters (i.e. p structure -list of kinetic parameters):
 include(string("InputFiles\\ARGS_",iARG.mm,"_Par_",iARG.ex,".jl"))
+# Fitting rules (i.e. mrw structure -list of metropolis random walk parameters;
+#					  d structure -experimental data/conditions;
+#					  mySIM -specific function to calculate simulated data):
+include(string("InputFiles\\ARGS_",iARG.mm,"_Fit_",iARG.ex,".jl"))
 pO = copy(p);
 
-## Load data to compare:
-# NOTE: d.Xe is always the data matrix used to calculate the MSE.
-using CSV
-using DataFrames
-### Using estimated data (from Pincus et al., 2010, Fig. 3) on           ###
-###    '\MODEL - Quantifying feedback\RUN_Natural_UPR\Data_Fig3.xlsx',   ###
-###    with rows 1,9,17 for (same) time points, and rows 2-8 for Fig. 3A,###
-###    rows 10-16 for Fig. 3B, and rows 18-24 for Fig. 3C data points.   ###
-x = CSV.File("DATA_UPR.csv") |> Tables.matrix;
-d = (tD  = x[1,2:end],						# Time points (min)
-	 DTT = parse.(Float64, x[2:8,1]),		# DTT concetration (mM)
-	 Xe  = x[vcat(2:8,10:16,18:24),2:end]);	# Data points
-
-##
+## Test dynamics:
 pOp  = [:gF,:cB,:gUB,:cBI];
 vOp  = [0.00595,0.06733,6658.35,0.13356];
 for i in 1:length(pOp)
 	p[pOp[i]] = vOp[i];
 end
-p[:cD] = 0.0 * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
-x0d = fn.SS(mm.myODE, p, x0, 1e-6);
-plot([0,1000],[x0d[15],x0d[15]],label=string("DTT = 0 mM"),lw=3,legend=:topleft)
-for dtt in 2:length(d.DTT)
-        p[:cD] = d.DTT[dtt] * p[:cD0] * p[:mMc] * p[:ERv]; # (DTT [mM])*(cD0*mMc*ERv)
-        xS = fn.Dyn(mm.myODE, p, x0d, 1000.0, 1e-6);
-        plot!(xS.t,[x0d[15],x0d[15]],label=string("DTT = ",d.DTT[dtt]," mM"),lw=3,legend=:topleft)
+Y = mySIM(fn,mm,p,d)
+open(string("TEST_DYN.txt"), "w") do io
+	writedlm(io, [vcat("DTT",[string(t) for t in d.tD])],'\t');
+	for i in 1:size(Y)[1]
+		writedlm(io, [vcat(vcat(d.DTT,d.DTT,d.DTT)[i],Y[i,:])],'\t');
+	end
+end
+
+## Test stability:
+d.tD .*= 10;
+Y = mySIM(fn,mm,p,d)
+open(string("TEST_DYN_LONG.txt"), "w") do io
+	writedlm(io, [vcat("DTT",[string(t) for t in d.tD])],'\t');
+	for i in 1:size(Y)[1]
+		writedlm(io, [vcat(vcat(d.DTT,d.DTT,d.DTT)[i],Y[i,:])],'\t');
+	end
 end
