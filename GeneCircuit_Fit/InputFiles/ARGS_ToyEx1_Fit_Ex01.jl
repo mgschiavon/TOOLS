@@ -14,7 +14,7 @@ mrw  = (pOp  = [:mX,:mY,:mZ],# Parameters to optimize
 		cov  = [0.1,0.1,0.1],# Covariance to calculate parameter random walk
 		M    = 2,	# "Mutation step size" for multiplicative random walk
 		rnP0 = 0,	# Flag for random initial values of parameters to optimize
-		temp = 1,	# Flag for simulated annealing (if 0, MRW)
+		temp = 0,	# Flag for simulated annealing (if 0, MRW)
 		prtW = 1);	# Flag for printing each walk step
 
 # Load data to compare:
@@ -29,7 +29,7 @@ d = (tD = x[1,2:end],		# Time points
 function mySIM(fn,mm,p,d)
 	Y = zeros(size(d.Xe));
 	# Calculate dynamics:
-	xS = fn.Dyn(mm.myODE, p, x0, 10.0, 1e-6);
+	xS = fn.Dyn(mm.myODE, p, x0, maximum(d.tD)*10.0, 1e-6);
 	for i in 1:length(d.tD)
 		Y[:,i] = xS(d.tD[i]);
 	end

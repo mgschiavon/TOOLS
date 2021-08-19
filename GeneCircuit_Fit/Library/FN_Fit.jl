@@ -74,6 +74,6 @@ module fn
 		yy[yy.==0].=1e-18;
 		dd = copy(D);
 		dd[dd.==0].=1e-18;
-		return (sum((log10.(dd) - log10.(yy)).^2)/std(log10.(dd)))/length(yy);
+		return sum((log10.(dd) - log10.(yy)).^2)/length(yy);
 	end;
 end
