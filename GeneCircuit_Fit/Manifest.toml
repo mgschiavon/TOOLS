@@ -101,10 +101,10 @@ uuid = "39de3d68-74b9-583c-8d2d-e117c070f3a9"
 version = "0.4.4"
 
 [[BandedMatrices]]
-deps = ["ArrayLayouts", "Compat", "FillArrays", "LinearAlgebra", "Random", "SparseArrays"]
-git-tree-sha1 = "8c83ee44dc9835263760ad4e77ed4eed4b3490c1"
+deps = ["ArrayLayouts", "FillArrays", "LinearAlgebra", "Random", "SparseArrays"]
+git-tree-sha1 = "bad4640d622657238f1144da2a639ba1703c5352"
 uuid = "aae01518-5342-5314-be14-df237901396f"
-version = "0.15.25"
+version = "0.16.8"
 
 [[BangBang]]
 deps = ["Compat", "ConstructionBase", "Future", "InitialValues", "LinearAlgebra", "Requires", "Setfield", "Tables", "ZygoteRules"]
@@ -900,9 +900,9 @@ uuid = "f2c3362d-daeb-58d1-803e-2bc74f2840b4"
 version = "0.1.13"
 
 [[Reexport]]
-git-tree-sha1 = "22a05aff275f6704f8769799beafe47ee7d14416"
+git-tree-sha1 = "45e428421666073eab6f2da5c9d310d99bb12f9b"
 uuid = "189a3867-3050-52da-a836-e630ba90ab69"
-version = "1.2.1"
+version = "1.2.2"
 
 [[Requires]]
 deps = ["UUIDs"]
