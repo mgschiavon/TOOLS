@@ -1,5 +1,6 @@
 ## ODE FITTING PIPELINE - Gene Regulatory Circuit models
 # Parameters & other instructions - Unfolded protein response #1 | Ex01
+# ODE model - Unfolded protein response as modeled in Pincus et al. (2010)
 #	Mariana Gómez-Schiavon
 #	August, 2021
 #		Julia v.1.5.3
@@ -50,3 +51,19 @@ x0[5] = 256;                # :I, Ire1
 x0[8] = 190;                # :Hu, Hac1 unspliced mRNA
 x0[10] = 12.9287;           # :Bm, BiP mRNA
 x0[11] = 75000;             # :B, BiP
+
+# Fitting instructions
+pOp = Dict([
+	:gF  => [0.00083333,0.00083333*0.2,1e-5,1e-1],  # Folding rate of protein in the folding complex [1/s]
+	:cB  => [0.0327,0.0327*0.2,1e-4,1e0],       	# Attachment rate of single BiP molecule to unfolded proteins [(1/mol)(1/s)]
+	:gUB => [195.9896,195.9896*0.2,1e0,1e4],    	# Dissociation rate of BiP from folding complex [1/s]
+	:cBI => [0.0327,0.0327*0.2,1e-4,1e0],           # Attachment rate of single BiP molecule to Ire1 [(1/mol)(1/s)]
+]);
+
+# Reference data:
+x = CSV.File("DATA_UPR.csv") |> Tables.matrix;
+tD = x[1,2:end];    					# Time points (min)
+vD = [15];								# Observable variables
+xD = x[vcat(2:8,10:16,18:24),2:end]);	# Data points
+# HOW TO HANDLE DTT cases?!?!
+DTT = parse.(Float64, x[2:8,1]),	# DTT concetration (mM)
