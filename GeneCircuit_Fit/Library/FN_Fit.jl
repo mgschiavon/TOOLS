@@ -64,16 +64,4 @@ module fn
 		end;
 		return xD
 	end;
-
-	# Mean Squared Error (MSE) between model and data
-	# INPUT: Y - Vector of model values (i.e. steady state predictions)
-	#        D - Vector of data values (i.e. steady state measurements)
-	# OUPUT:   - Mean Squared Error
-	function MSE(Y,D)
-		yy = copy(Y);
-		yy[yy.==0].=1e-18;
-		dd = copy(D);
-		dd[dd.==0].=1e-18;
-		return (sum((log10.(dd) - log10.(yy)).^2)/std(log10.(dd)))/length(yy);
-	end;
 end
