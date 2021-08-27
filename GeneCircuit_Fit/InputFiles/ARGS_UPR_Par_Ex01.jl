@@ -65,5 +65,5 @@ x = CSV.File("DATA_UPR.csv") |> Tables.matrix;
 tD = x[1,2:end];    					# Time points (min)
 vD = [15];								# Observable variables
 xD = x[vcat(2:8,10:16,18:24),2:end]);	# Data points
-# HOW TO HANDLE DTT cases?!?!
+# HOW TO HANDLE DTT CASES?!?!
 DTT = parse.(Float64, x[2:8,1]),	# DTT concetration (mM)
