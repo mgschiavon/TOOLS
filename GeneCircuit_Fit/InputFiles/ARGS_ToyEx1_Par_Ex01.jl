@@ -17,11 +17,11 @@ p = Dict([
 
 # Initial conditions:
 x0 = zeros(3);
-x0[1] = 0;		  	  # X
+x0[1] = 0;		  	 # X
 x0[2] = 0;           # Y
 x0[3] = 0;           # Z
 
-# Fitting instructions
+# Fitting instructions ([mean, standard deviation, minimum value, maximum value]):
 pOp = Dict([
 	:mX => [5.8,5.8*0.2,0,100],       # X synthesis rate (1/min)
 	:mY => [2.1,2.1*0.2,0,100],       # Y synthesis rate (1/min)
